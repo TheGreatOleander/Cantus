@@ -1,26 +1,23 @@
+
 import sys
-import os
 from cantus.vm import CantusVM
-from cantus.tokenizer import tokenize
+from cantus.dsl import parse
+from cantus.compiler import compile
 
 def main():
-    print("● CANTUS | Executable Music Engine v0.1")
-    print("---------------------------------------")
-    
-    audio_file = sys.argv[1] if len(sys.argv) > 1 else None
-    
-    try:
-        tokens = tokenize(audio_file)
-        print(f"ASM: {tokens}")
-        
-        vm = CantusVM()
-        result = vm.execute(tokens)
-        
-        print(f"RESULT: {result}")
-        print("---------------------------------------")
-        print("Execution Successful.")
-    except Exception as e:
-        print(f"CRITICAL ERROR: {e}")
+    if len(sys.argv)<2:
+        print("Usage: python -m cantus.cli program.cantus")
+        return
 
-if __name__ == "__main__":
+    with open(sys.argv[1]) as f:
+        source=f.read()
+
+    tokens=parse(source)
+    vm=CantusVM()
+    result=vm.execute(tokens)
+
+    print("Final Stack:",result)
+    print("Bytecode:",compile(tokens))
+
+if __name__=="__main__":
     main()

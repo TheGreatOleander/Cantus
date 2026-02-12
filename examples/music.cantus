@@ -1,0 +1,7 @@
+
+# Musical aesthetic demo
+PUSH 3
+PUSH 4
+MUL
+PRINT
+HALT

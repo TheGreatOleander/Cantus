@@ -1,0 +1,18 @@
+
+# Factorial of 5
+
+PUSH 5
+PUSH 1
+LABEL loop
+DUP
+JZ end
+SWAP
+OVER
+MUL
+SWAP
+PUSH 1
+SUB
+JMP loop
+LABEL end
+POP
+PRINT

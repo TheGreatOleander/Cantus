@@ -1,0 +1,9 @@
+
+# Self-modifying demo
+PUSH 99
+PUSH 0
+POKE
+PUSH 1
+ADD
+PRINT
+HALT
